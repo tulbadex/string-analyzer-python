@@ -19,28 +19,25 @@ sudo apt install -y nginx
 # Install Git (if not already installed)
 sudo apt install -y git
 
-# Clean up existing PHP files and setup directory
-echo "🧹 Cleaning up existing files..."
-sudo rm -rf /var/www/string-analyzer-api
+# Setup application directory
+echo "📥 Setting up repository..."
 sudo mkdir -p /var/www/string-analyzer-api
 sudo chown -R $USER:$USER /var/www/string-analyzer-api
+cd /var/www/string-analyzer-api
 
-# Clone or pull from repository
-echo "📥 Setting up repository..."
-cd /var/www
-if [ -d "string-analyzer-api/.git" ]; then
+if [ -d ".git" ]; then
     echo "Repository exists, pulling latest changes..."
-    cd string-analyzer-api
     git pull origin main
 else
     echo "Cloning repository for first time..."
-    git clone git@github.com:tulbadex/string-analyzer-python.git string-analyzer-api
-    cd string-analyzer-api
+    git clone git@github.com:tulbadex/string-analyzer-python.git .
 fi
 
-# Create virtual environment
-echo "🔧 Creating Python virtual environment..."
-python3 -m venv venv
+# Create virtual environment if it doesn't exist
+echo "🔧 Setting up Python virtual environment..."
+if [ ! -d "venv" ]; then
+    python3 -m venv venv
+fi
 source venv/bin/activate
 
 # Install dependencies
