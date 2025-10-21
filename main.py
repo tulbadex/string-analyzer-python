@@ -124,7 +124,7 @@ def root():
 @api.post("/strings", status_code=201)
 def add_string(data: StringData):
     if not data.value:
-        raise HTTPException(status_code=422, detail="Invalid data type for 'value' field")
+        raise HTTPException(status_code=422, detail="Invalid data type for value field")
     
     string_hash = StringAnalysis.compute_hash(data.value)
     
@@ -149,7 +149,7 @@ def retrieve_string(string_value: str):
         if record["value"] == string_value:
             return record
     
-    raise HTTPException(status_code=404, detail="String doesn't exist in database")
+    raise HTTPException(status_code=404, detail="String does not exist in database")
 
 @api.get("/strings")
 def list_strings(
