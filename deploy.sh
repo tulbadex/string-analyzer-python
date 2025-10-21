@@ -8,9 +8,9 @@ echo "🚀 Starting String Analyzer API Deployment..."
 echo "📦 Updating system packages..."
 sudo apt update && sudo apt upgrade -y
 
-# Install Python 3.11 and pip
-echo "🐍 Installing Python 3.11..."
-sudo apt install -y python3.11 python3.11-pip python3.11-venv
+# Install Python 3 and pip
+echo "🐍 Installing Python 3..."
+sudo apt install -y python3 python3-pip python3-venv
 
 # Install Nginx
 echo "🌐 Installing Nginx..."
@@ -40,7 +40,7 @@ fi
 
 # Create virtual environment
 echo "🔧 Creating Python virtual environment..."
-python3.11 -m venv venv
+python3 -m venv venv
 source venv/bin/activate
 
 # Install dependencies
@@ -60,7 +60,7 @@ User=$USER
 Group=www-data
 WorkingDirectory=/var/www/string-analyzer-api
 Environment="PATH=/var/www/string-analyzer-api/venv/bin"
-ExecStart=/var/www/string-analyzer-api/venv/bin/uvicorn main:app --host 0.0.0.0 --port 8000
+ExecStart=/var/www/string-analyzer-api/venv/bin/uvicorn main:api --host 0.0.0.0 --port 8000
 Restart=always
 
 [Install]
