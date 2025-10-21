@@ -26,7 +26,7 @@ jobs:
     - name: Test API endpoints
       run: |
         # Start the API in background
-        uvicorn main:app --host 0.0.0.0 --port 8000 &
+        uvicorn main:api --host 0.0.0.0 --port 8000 &
         sleep 5
         
         # Test health check
